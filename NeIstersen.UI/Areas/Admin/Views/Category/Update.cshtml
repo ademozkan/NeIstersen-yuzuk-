@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section style{
+    <style>
+        #categoriortala {
+            margin-left: 450px;
+        }
+    </style>
+}
+@using NeIstersen.Model.Entity
+@model Category
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h1 class="box-title" id="categoriortala">Categori Guncelle</h1>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="/Admin/Category/Update" method="post">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="ID">ID</label>
+                    <input readonly value="@Model.ID" type="text" name="ID" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Adi">ADI</label>
+                    <input type="text" value="@Model.Adi" name="Adi" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Aciklama">ACIKLAMA</label>
+                    <textarea name="Aciklama" class="form-control" rows="5">@Model.Aciklama</textarea>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-block btn-info btn-sm">GUNCELLE</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.box -->
+   
+</div>
+

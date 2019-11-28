@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section style{
+    <style>
+        #uortala {
+            margin-left: 450px;
+        }
+    </style>
+}
+@using NeIstersen.Model.Entity
+@model Product
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h1 class="box-title" id="uortala">Ürün Guncelle</h1>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="/Admin/Product/Update" method="post">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="ID">ID</label>
+                    <input readonly value="@Model.ID" type="text" name="ID" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Adi">ADI</label>
+                    <input type="text" value="@Model.Adi" name="Adi" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Stok">
+                        Ürün Stok Adedi
+                    </label>
+                    <input name="Stok" value="@Model.Stok" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="AlisFiyat">
+                        Ürün Alış Fiyatı
+                    </label>
+                    <input name="AlisFiyat" value="@Model.AlisFiyat" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="SatisFiyat">
+                        Ürün Satış Fiyatı
+                    </label>
+                    <input name="SatisFiyat" value="@Model.SatisFiyat" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Aciklama">ACIKLAMA</label>
+                    <textarea name="Aciklama" class="form-control" rows="5">@Model.Ozellikler</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="WebdeGoster">
+                        Webde Göster
+                    </label>
+                    <input type="checkbox" data-val="true" checked="@Model.WebdeGoster" value="true" name="WebdeGoster" class="checkbox" />
+                </div>
+
+
+                <div class="form-group">
+                    <label for="MobildeGoster">
+                        Mobilde Göster
+                    </label>
+                    <input type="checkbox" data-val="true" checked="@Model.MobildeGoster" value="true" name="MobildeGoster" class="checkbox" />
+                </div>
+
+                <div class="form-group">
+                    <label for="CategoryID">
+                        Ürün Kategorisi
+                    </label>
+                    <select class="form-control" name="CategoryID">
+                        @foreach (var item in ViewData["Categories"] as List<Category>)
+                        {
+                            <option @(Model.CategoryID == item.ID ? "selected=\"selected\"" : "") value="@item.ID">@item.Adi</option>
+                        }
+                    </select>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-block btn-info btn-sm">GUNCELLE</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.box -->
+
+</div>

@@ -1,0 +1,697 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Content/images/icons/favicon.png" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/themify/themify-icons.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/elegant-font/html-css/style.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/slick/slick.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/noui/nouislider.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/main.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="~/Content/css/text.css">
+
+
+</head>
+<body class="animsition">
+
+    <!-- Header -->
+    <header class="header1">
+        <!-- Header desktop -->
+        <div class="container-menu-header">
+            <div class="topbar">
+                <div class="topbar-social">
+                    <a href="https://facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+                    <a href="https://instagram.com/" class="topbar-social-item fa fa-instagram"></a>
+                    <a href="https://pinterest.com/" class="topbar-social-item fa fa-pinterest-p"></a>
+                    <a href="https://snapchat.com/" class="topbar-social-item fa fa-snapchat-ghost"></a>
+                    <a href="https://youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+                </div>
+
+                <span class="topbar-child1">
+                    100 $ üzerindeki siparişler için ücretsiz KARGO!!
+                </span>
+
+                <div class="topbar-child2">
+                    <span class="topbar-email">
+                        NeIstersen@example.com
+                    </span>
+
+
+                </div>
+            </div>
+
+            <div class="wrap_header">
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <h2 style="font-weight: bold;color:crimson;font-style: italic">NEISTERSEN</h2>
+                </a>
+
+                <!-- Menu -->
+                <div class="wrap_menu">
+                    <nav class="menu">
+                        <ul class="main_menu">
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { area = "" })">Ana Sayfa</a>
+
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("Index", "About", new { area = "" })">Hakkımızda</a>
+                            </li>
+
+                            <li class="sale-noti">
+                                <a href="@Url.Action("Alisveris", "About", new { area = "" })">Güvenli Alıs-Veris</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Header Icon -->
+                <div class="header-icons">
+                    @{//Giris yapılmısmı kontrolu(namin bos gelmeme durumuna gore)
+                        if (string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name))
+                        {
+                            <a href="#" id="Giris" class="header-wrapicon1 dis-block">
+                                Giris
+                                <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Logout", "Account", new { area = "" })" class="header-wrapicon1 dis-block">
+                                Meraba @HttpContext.Current.User.Identity.Name
+                                <br /><p>&nbsp;&nbsp;&nbsp;Çıkıs Yap</p>
+
+                            </a>
+                            <img style="margin-left:10px" src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                        }
+                    }
+
+
+                    <span class="linedivide1"></span>
+
+                    <div class="header-wrapicon2">
+                        <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <span id="cartItemCount" class="header-icons-noti">0</span>
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown">
+                            <ul id="Sepet" class="header-cart-wrapitem">
+                                @*<li class="header-cart-item">
+                                        <div class="header-cart-item-img">
+                                            <img src="~/Content/images/item-cart-01.jpg" alt="IMG">
+                                        </div>
+
+                                        <div class="header-cart-item-txt">
+                                            <a href="#" class="header-cart-item-name">
+                                                White Shirt With Pleat Detail white
+                                            </a>
+
+                                            <span class="header-cart-item-info">
+                                                1 x $19.00
+                                            </span>
+                                        </div>
+                                    </li>
+
+                                    <li class="header-cart-item">
+                                        <div class="header-cart-item-img">
+                                            <img src="~/Content/images/item-cart-02.jpg" alt="IMG">
+                                        </div>
+
+                                        <div class="header-cart-item-txt">
+                                            <a href="#" class="header-cart-item-name">
+                                                Converse All Star Hi Black Canvas
+                                            </a>
+
+                                            <span class="header-cart-item-info">
+                                                1 x $39.00
+                                            </span>
+                                        </div>
+                                    </li>
+
+                                    <li class="header-cart-item">
+                                        <div class="header-cart-item-img">
+                                            <img src="~/Content/images/item-cart-03.jpg" alt="IMG">
+                                        </div>
+
+                                        <div class="header-cart-item-txt">
+                                            <a href="#" class="header-cart-item-name">
+                                                Nixon Porter Leather Watch In Tan
+                                            </a>
+
+                                            <span class="header-cart-item-info">
+                                                1 x $17.00
+                                            </span>
+                                        </div>
+                                    </li>*@
+                            </ul>
+
+                            <div id="subtotal" class="header-cart-total">
+                                Total: $0
+                            </div>
+
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    @if (string.IsNullOrWhiteSpace(HttpContext.Current.User.Identity.Name))
+                                    {
+                                        <div href="#" style="width:300px" class="header-cart-total">
+                                            Lütfen Yukarıdan Giris Yapın
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Create","Order",new {area="Member" })" id="you" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                            Siparis Ver
+                                        </a>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Mobile -->
+        <div class="wrap_header_mobile">
+            <!-- Logo moblie -->
+            <a href="~/Content/index.html" class="logo-mobile">
+                <img src="~/Content/images/icons/logo.png" alt="IMG-LOGO">
+            </a>
+
+            <!-- Button show menu -->
+            <div class="btn-show-menu">
+                <!-- Header Icon mobile -->
+                <div class="header-icons-mobile">
+
+                    <a href="#" id="Giris" class="header-wrapicon1 dis-block">
+                        <img src="~/Content/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+
+
+                    </a>
+
+                    <span class="linedivide2"></span>
+
+                    <div class="header-wrapicon2">
+                        <img src="~/Content/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <span class="header-icons-noti">0</span>
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown">
+                            <ul class="header-cart-wrapitem">
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="~/Content/images/item-cart-01.jpg" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            White Shirt With Pleat Detail Back
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $19.00
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="~/Content/images/item-cart-02.jpg" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            Converse All Star Hi Black Canvas
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $39.00
+                                        </span>
+                                    </div>
+                                </li>
+
+                                <li class="header-cart-item">
+                                    <div class="header-cart-item-img">
+                                        <img src="~/Content/images/item-cart-03.jpg" alt="IMG">
+                                    </div>
+
+                                    <div class="header-cart-item-txt">
+                                        <a href="#" class="header-cart-item-name">
+                                            Nixon Porter Leather Watch In Tan
+                                        </a>
+
+                                        <span class="header-cart-item-info">
+                                            1 x $17.00
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="header-cart-total">
+                                Total: $75.00
+                            </div>
+
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="~/Content/cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        View Cart
+                                    </a>
+                                </div>
+
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        Check Out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="wrap-side-menu">
+            <nav class="side-menu">
+                <ul class="main-menu">
+                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+                        <span class="topbar-child1">
+                            100$ Üzeri Siparislerde Ücretsiz KARGO!!
+                        </span>
+                    </li>
+
+                    <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+                        <div class="topbar-child2-mobile">
+                            <span class="topbar-email">
+                                NeIstersen@example.com
+                            </span>
+
+
+                        </div>
+                    </li>
+
+                    <li class="item-topbar-mobile p-l-10">
+                        <div class="topbar-social-mobile">
+                            <a href="#" class="topbar-social-item fa fa-facebook"></a>
+                            <a href="#" class="topbar-social-item fa fa-instagram"></a>
+                            <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+                            <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+                            <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
+                        </div>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="@Url.Action("Index", "Home", new { area = "" })">Home</a>
+                        <ul class="sub-menu">
+                            <li><a href="~/Content/index.html">Homepage V1</a></li>
+                            <li><a href="~/Content/home-02.html">Homepage V2</a></li>
+                            <li><a href="~/Content/home-03.html">Homepage V3</a></li>
+                        </ul>
+                        <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="~/Content/product.html">Shop</a>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="~/Content/product.html">Sale</a>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="~/Content/cart.html">Features</a>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="~/Content/blog.html">Blog</a>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="~/Content/about.html">About</a>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <a href="~/Content/contact.html">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    @*orta Bölum*@
+    <section class="bgwhite p-t-55 p-b-65">
+        <div class="container">
+            <div class="row">
+
+                @*Category Menusu PartialView kodu*@
+
+                @{
+                    @RenderSection("PartialView", false) //veya
+                    //Html.RenderAction("MainMenu", "Pages", new { area = "" });
+
+                }
+
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+    <!--Modal-->
+    <div class="modal fade" id="youModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="        padding: 35px 50px;">
+
+
+                </div>
+                <div class="modal-body" style="        padding: 40px 50px;">
+                    <h4 style=" text-align:center;       color: #D10024"> Siparisiniz alındı</h4>
+                    
+                </div>
+                <div class="modal-footer">
+
+                    
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"> Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="        padding: 35px 50px;">
+
+
+                </div>
+                <div class="modal-body" style="        padding: 40px 50px;">
+                    <h4 style=" text-align:center;       color: #D10024"> Giris</h4>
+                    <form role="form" action="/Account/Login" method="post">
+                        <div class="form-group">
+                            <label for="KullaniciAdi"> Kullanıcı Adı</label>
+                            <input type="text" class="form-control" name="KullaniciAdi" id="usrname" placeholder="User Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Parola"> Parola</label>
+                            <input type="password" class="form-control" name="Parola" id="psw" placeholder="Enter password">
+                        </div>
+
+                        <button type="submit" class="btn btn-danger btn-block"> Giris Yap</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                    <p style="color:white">Not a member? <a style="color:#D10024" href="@Url.Action("Signup","Account")">Sign Up</a></p>
+                    <p>&emsp;&emsp;</p>
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"> Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--/Modal-->
+    <!-- Footer -->
+    <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+        <div class="flex-w p-b-90">
+            <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+                <h4 class="s-text12 p-b-30">
+                    ADRES
+                </h4>
+
+                <div>
+                    <p class="s-text7 w-size27">
+                        379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                    </p>
+
+                    <div class="flex-m p-t-30">
+                        <a href="" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+                        <a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+                        <a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
+                        <a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
+                        <a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width:230px" class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 style="text-align:center" class="s-text12 p-b-30">
+                    HIZLI TESLİMAT
+                </h4>
+
+                <div class="item-slick3" data-thumb="images/thumb-item-02.jpg">
+                    <div class="wrap-pic-w">
+
+                        <img src="~/Content/images/icons/hızlı-kargo-hızlı-gönderi-satis-ithalat-web-tr-300x162.png" alt="IMG-PRODUCT" />
+                    </div>
+                </div>
+                <p style="text-align:center"><br /><br />Hafta İci Hergun Hızlı Teslimat HAKKI!! </p>
+            </div>
+
+            <div style="width:230px;margin-left:30px" class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 style="text-align:center" class="s-text12 p-b-30">
+                    İADE HAKKI
+                </h4>
+                <div class="wrap-pic-w">
+                    <img src="~/Content/images/icons/iade-hakki.jpg" alt="IMG-PRODUCT" />
+                </div>
+                <p style="text-align:center"><br /><br />Memnun kalınmayan urunlerde 30 gun boyunca iade HAKKI!!</p>
+
+            </div>
+
+            <div style="width:230px;margin-left:30px" class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                <h4 style="text-align:center" class="s-text12 p-b-30">
+                    TEK TIKLA GÜVENLİ ALIS-VERİS
+                </h4>
+                <div class="wrap-pic-w">
+
+                    <img style="top:25px" src="~/Content/images/icons/tıklamaoranı.png" alt="IMG-PRODUCT" />
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="t-center p-l-15 p-r-15">
+            <a href="#">
+                <img class="h-size2" src="~/Content/images/icons/paypal.png" alt="IMG-PAYPAL">
+            </a>
+
+            <a href="#">
+                <img class="h-size2" src="~/Content/images/icons/visa.png" alt="IMG-VISA">
+            </a>
+
+            <a href="#">
+                <img class="h-size2" src="~/Content/images/icons/mastercard.png" alt="IMG-MASTERCARD">
+            </a>
+
+            <a href="#">
+                <img class="h-size2" src="~/Content/images/icons/express.png" alt="IMG-EXPRESS">
+            </a>
+
+            <a href="#">
+                <img class="h-size2" src="~/Content/images/icons/discover.png" alt="IMG-DISCOVER">
+            </a>
+
+            <div class="t-center s-text8 p-t-20">
+                Tüm hakları Saklıdır  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#" target="_blank"></a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top bg0-hov" id="myBtn">
+        <span class="symbol-btn-back-to-top">
+            <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+        </span>
+    </div>
+
+    <!-- Container Selection -->
+    <div id="dropDownSelect1"></div>
+    <div id="dropDownSelect2"></div>
+
+
+
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/bootstrap/js/popper.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/select2/select2.min.js"></script>
+    <script type="text/javascript">
+        $(".selection-1").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect1')
+        });
+
+        $(".selection-2").select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect2')
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/daterangepicker/moment.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/slick/slick.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/slick-custom.js"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/sweetalert/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.block2-btn-addcart').each(function () {
+            var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+            $(this).on('click', function () {
+                swal(nameProduct, "is added to cart !", "success");
+            });
+        });
+
+        $('.block2-btn-addwishlist').each(function () {
+            var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+            $(this).on('click', function () {
+                swal(nameProduct, "is added to wishlist !", "success");
+            });
+        });
+    </script>
+
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="~/Content/vendor/noui/nouislider.min.js"></script>
+    <script type="text/javascript">
+        /*[ No ui ]
+        ===========================================================*/
+        var filterBar = document.getElementById('filter-bar');
+
+        noUiSlider.create(filterBar, {
+            start: [50, 200],
+            connect: true,
+            range: {
+                'min': 50,
+                'max': 200
+            }
+        });
+
+        var skipValues = [
+            document.getElementById('value-lower'),
+            document.getElementById('value-upper')
+        ];
+
+        filterBar.noUiSlider.on('update', function (values, handle) {
+            skipValues[handle].innerHTML = Math.round(values[handle]);
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="~/Content/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script>
+        //Siparis ve Giris modalları
+        $(document).ready(function () {
+            $("#Giris").click(function () {
+                $("#myModal").modal();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#yap").click(function () {
+                $("#myModal").modal();
+            });
+        });
+        
+        $(document).ready(function () {
+            $("#you").click(function () {
+                $("#youModal").modal();
+            });
+        });
+
+
+    </script>
+    <script>
+        function GetCartData() {
+
+
+
+                //id yakalama
+                var id = $("#SepeteEkle").attr("val");
+
+
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "Json",
+                    url: "@Url.Action("Add","Cart")/" + id,
+                    success: function (data) {
+
+
+                    var count = Object.keys(data).length;
+
+                    var totalAmount = 0;
+
+                    if (count > 0) {
+                        $.each(data, function (key,item) {
+                            $("#Sepet").append("<li class='header-cart-item'><div class='header-cart-item-img'><img src='~/Content/images/item-cart-01.jpg' alt='IMG'></div><div class='header-cart-item-txt'><a href='#' class='header-cart-item-name'>"+item.UrunAdi+"</a><span class='header-cart-item-info'>"+item.Miktari+"x"+item.Fiyati+"</span></div></li>");
+                            totalAmount += (item.Miktari * item.Fiyati);
+                        })
+                    }
+                    $("#subtotal").html("$" + totalAmount);
+                    $("#cartItemCount").html(count);
+                    //$(".qty").html(count);
+
+                    }
+                })
+
+
+            }
+    </script>
+
+
+
+</body>
+</html>

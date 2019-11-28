@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@section style{
+    <style>
+        #ProductOrtala {
+            margin-left: 450px;
+        }
+    </style>
+}
+
+@using NeIstersen.Model.Entity
+@model List<Product>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" id="ProductOrtala">Ürün Listesi</h3>
+
+                <div class="box-tools">
+                    <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Adı</th>
+                        <th>Stok Miktarı</th>
+                        <th>Alıs Fiyat</th>
+                        <th>Satıs Fiyat</th>
+                        <th>Webde Göster</th>
+                        <th>Mobilde Göster</th>
+                        <th>Ürün Özellikler</th>
+                        @*<th>Görsel</th>*@
+
+                        <th colspan="2">Güncelle / Sil</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Adi</td>
+                            <td>@item.Stok</td>
+                            <td>@item.AlisFiyat</td>
+                            <td>@item.SatisFiyat</td>
+
+                            @{
+                                if (item.WebdeGoster)
+                                {
+                                    <td class="success">Webde Gösterilir</td>
+                                }
+                                else
+                                {
+                                    <td class="danger">Webde Gösterilmez</td>
+                                }
+                            }
+                            @{
+                                if (item.MobildeGoster)
+                                {
+                                    <td class="success">Mobilde Gösterilir</td>
+                                }
+                                else
+                                {
+                                    <td class="danger">Mobilde Gösterilmez</td>
+                                }
+                            }
+                            <td>@item.Ozellikler</td>
+
+                            <td>
+                                <a href="/Admin/Product/Update/@item.ID">Güncelle</a>
+                                /
+                                <a href="/Admin/Product/Delete/@item.ID">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div style="width:660px;margin-left:340px;margin-top:1px;margin-bottom:1px">
+        <form action="/Account/Signup" method="post">
+
+            <div class="form-group">
+                <label for="KullaniciAdi">
+                    Kullanıcı Adı
+                </label>
+                <input style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" name="KullaniciAdi" required class="form-control" />
+                <span style="color:red">@ViewBag.Message</span>
+            </div>
+
+            <div class="form-group">
+                <label for="Parola">
+                    Parola
+                </label>
+                <input type="password" style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" name="Parola" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="Email">
+                    Email
+                </label>
+                <input type="email" style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" name="Email" required class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="Adi">
+                    Adi
+                </label>
+                <input name="Adi" style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="SoyAdi">
+                    SoyAdi
+                </label>
+                <input name="SoyAdi" style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="TelefonNumarası">
+                    TelefonNumarası
+                </label>
+                <input name="TelefonNumarası" style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label for="DogumTarhi">
+                    DogumTarhi
+                </label>
+                <input type="date" style="box-shadow: inset 0 0 0.2em black;font:12px Arial, Helvetica, sans-serif;" name="BirthDate" class="form-control" />
+            </div>
+            <input type="submit" value="Ekle" class="form-control btn btn-danger" style="background-color:brown" />
+
+        </form>
+    </div>
+

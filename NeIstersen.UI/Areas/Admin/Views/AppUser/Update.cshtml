@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section style{
+    <style>
+        #uortala {
+            margin-left: 450px;
+        }
+    </style>
+}
+@using NeIstersen.Model.Entity
+@model AppUser
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h1 class="box-title" id="uortala">Ürün Guncelle</h1>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="/Admin/AppUser/Update" method="post">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="ID">ID</label>
+                    <input readonly value="@Model.ID" type="text" name="ID" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Adi">ADI</label>
+                    <input type="text" value="@Model.Adi" name="Adi" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="SoyAdi">
+                        SoyAdi
+                    </label>
+                    <input name="SoyAdi" value="@Model.SoyAdi" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="KullaniciAdi">
+                        Kullanıcı Adı
+                    </label>
+                    <input name="KullaniciAdi" value="@Model.KullaniciAdi" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Email">
+                        Email
+                    </label>
+                    <input name="Email" value="@Model.Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Parola">
+                        Sifre
+                    </label>
+                    <input name="Parola" value="@Model.Parola" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="UserRole">Rolü: @Model.Rolu.ToString()</label>
+                    <select name="Role" class="form-control">
+                        @foreach (var item in Enum.GetNames(typeof(NeIstersen.Model.Entity.Role)))
+                        {
+                            <option value="@item" @(Model.Rolu.ToString() == item ? "selected=\"selected\"" : "")>@item</option>
+                        }
+                    </select>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-block btn-info btn-sm">GUNCELLE</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.box -->
+
+</div>
+

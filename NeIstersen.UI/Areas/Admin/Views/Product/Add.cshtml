@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using NeIstersen.Model.Entity
+@model List<Category>
+@section style{
+    <style>
+        #urunortala {
+            margin-left: 450px;
+        }
+    </style>
+}
+
+<div class="col-md-12">
+    <!-- general form elements -->
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h1 class="box-title" id="urunortala">Ürün Ekle</h1>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="/Admin/Product/Add" method="post">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="Adi">Adı</label>
+                    <input type="text" name="Adi" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Stok">Stok Miktarı</label>
+                    <input type="text" name="Stok" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="AlisFiyat">Alıs Miktarı</label>
+                    <input type="text" name="AlisFiyat" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="SatisFiyat">Satis Fiyat</label>
+                    <input type="text" name="SatisFiyat" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="WebdeGoster">
+                        <input type="checkbox" data-val="true" value="true" name="WebdeGoster" class="checkbox" />
+                        Webde Göster
+                    </label>
+
+                </div>
+                <div class="form-group">
+                    <label for="MobildeGoster">
+                        <input type="checkbox" data-val="true" value="true" name="MobildeGoster" class="checkbox" />
+                        Mobilde Göster
+                    </label>
+
+                </div>
+                <div class="form-group">
+                    <label for="Image">
+                        Ürün Görseli
+                    </label>
+                    <input type="file" name="Image" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="Ozellikler">Ürün Özellikleri</label>
+                    <textarea name="Ozellikler" class="form-control" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="CategoryID">
+                        Ürün Kategorisi
+                    </label>
+                    <select class="form-control" name="CategoryID">
+
+                        @foreach (var item in Model)
+                        {
+                            <option value="@item.ID">@item.Adi</option>
+                        }
+                    </select>
+                </div>
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-block btn-info btn-sm">EKLE</button>
+            </div>
+        </form>
+    </div>
+    <!-- /.box -->
+    @section script{
+        @*Aynı İsimde Kategori eklenmesini onleyip kontrol eden script*@
+        @if (ViewBag.UrunVar != null)
+        {
+            <script type="text/javascript">
+                window.onload = function () {
+                    alert("@ViewBag.UrunVar")
+                }
+            </script>
+        }
+    }
+</div>
+
